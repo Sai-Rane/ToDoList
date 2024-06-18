@@ -1,35 +1,35 @@
-/* body{
-background: #8758ff;
+.main{
+    background-color: rgb(77, 155, 232);
+    width: 95%;
+    border-radius: 5px;
+    margin: 20px 20px 20px 20px;
+    padding: 20px;  
+    border: 2px solid rgb(168, 227, 51);
 }
 
-.toDo_Text{
-    text-align: center;
-    font-family: "source-code-pro";
-    font-size: larger;
+body{
+background-color: rgb(10 51 92);
+color: white;
 }
-.main{
-    margin-top: 10px;
-    display: flex;
-    justify-content: center
+h1{
+    text-align: center;
+    color: white;
 }
 .textTask{
-    border-radius: 2px;
-    padding: 10px;
-    width: 40%;
+    width: 20%;
+    height: 25px;
+    padding: 5px;
 }
-.taskArea{
-    background-color: aqua;
+.main-Two{
     display: flex;
     justify-content: center;
-    margin: 1% 20%;
+    gap: 5px;
 }
-.addTaskBtn{
-    border-radius: 2px;
-    cursor: pointer;
-}
-.removeTaskBtn{
-    border-radius: 2px;
-    cursor: pointer;
-    padding: 10px;
 
-} */
+.taskArea{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: rgb(29, 108, 187);
+    gap: 20px;
+    border-radius: 5px;
+}

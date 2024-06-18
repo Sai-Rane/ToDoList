@@ -1,8 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./ToDo.css";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DoneIcon from "@mui/icons-material/Done";
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
+import Button from "@mui/material/Button";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import Chip from "@mui/material/Chip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { getLocalData, setLocalData } from "./util";
 
@@ -108,9 +114,11 @@ const ToDo = () => {
   }, [taskData]);
   console.log("taskData", taskData);
   return (
-    <div>
-      <div className="toDo_Text">To Do List</div>
-      <div className="main">
+    <div className="main">
+      <div className="toDo_Text">
+        <h1>To Do List</h1>
+      </div>
+      <div className="main-Two">
         <input
           className="textTask"
           ref={refElement}
@@ -121,13 +129,19 @@ const ToDo = () => {
           }}
           placeholder="Add your task"
         />
-        <button className="addTaskBtn" disabled={taskButton} onClick={addTask}>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={addTask}
+          disabled={taskButton}
+        >
           Add Task
-        </button>
+        </Button>
       </div>
 
       {/* displaying tasks */}
-      <p>Here are your tasks</p>
+      <h1>Here are your Tasks</h1>
+
       <RadioGroup
         row
         aria-labelledby="demo-radio-buttons-group-label"
@@ -137,17 +151,17 @@ const ToDo = () => {
       >
         <FormControlLabel
           value="allTasks"
-          control={<Radio />}
+          control={<Radio color="default" />}
           label="All Tasks"
         />
         <FormControlLabel
           value="activeTasks"
-          control={<Radio />}
+          control={<Radio color="default" />}
           label="Active Tasks"
         />
         <FormControlLabel
           value="completedTasks"
-          control={<Radio />}
+          control={<Radio color="default" />}
           label="Completed Tasks"
         />
       </RadioGroup>
@@ -158,36 +172,61 @@ const ToDo = () => {
             <>
               <div className="taskArea" key={index}>
                 {editData.isEdit && editData.index == index ? (
-                  <input defaultValue={ele.todo} onChange={handleEdit} />
+                  <ol>
+                    <li>
+                      <div>
+                        <input defaultValue={ele.todo} onChange={handleEdit} />
+                      </div>
+                    </li>
+                  </ol>
                 ) : (
-                  <div>{ele.todo}</div>
+                  <ol>
+                    <li>
+                      <div>{ele.todo}</div>
+                    </li>
+                  </ol>
                 )}
 
                 <div>
-                  <button
-                    className="removeTaskBtn"
+                  <Chip
+                    icon={<DeleteIcon />}
+                    label="Delete Task"
                     onClick={() => removeTask(index)}
-                  >
-                    {/* Remove */}
-                    <DeleteIcon />
-                  </button>
-                  <button onClick={() => editTask(index)}>
-                    {editData.isEdit && editData.index == index
-                      ? "Update"
-                      : "Edit"}
-                  </button>
+                    deleteIcon={<DeleteIcon />}
+                  />
+                </div>
+
+                <div>
+                  <Chip
+                    icon={<EditIcon />}
+                    onClick={() => editTask(index)}
+                    label={
+                      editData.isEdit && editData.index == index
+                        ? "Update"
+                        : "Edit"
+                    }
+                  />
                   {editData.isEdit && editData.index == index && (
-                    <button
+                    <Chip
+                      icon={<CloseIcon />}
+                      label="Cancel"
                       onClick={() =>
                         setEditData({ isEdit: false, index: null })
                       }
-                    >
-                      Cancel
-                    </button>
+                    />
                   )}
-                  <button onClick={() => completeTask(index)}>
-                    {ele.completed ? "Done" : "Mark as done"}
-                  </button>
+                </div>
+
+                <div>
+                  {ele.completed ? (
+                    <Chip label="success" color="success" />
+                  ) : (
+                    <Chip
+                      label="Mark as Done"
+                      onClick={() => completeTask(index)}
+                      deleteIcon={<DoneIcon />}
+                    />
+                  )}
                 </div>
               </div>
             </>
