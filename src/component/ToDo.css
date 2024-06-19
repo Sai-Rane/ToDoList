@@ -23,7 +23,7 @@ h1{
     width: 20%;
     height: 20px;
     padding: 5px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 .main-Two{
     display: flex;
@@ -38,8 +38,8 @@ h1{
     margin-bottom: 2%;
 }
 .radioArea{
-    display: grid;
-    justify-content: "center"
+    display: flex;
+    justify-content: center;
 }
 .taskSerial{
     display: flex;

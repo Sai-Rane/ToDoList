@@ -36,6 +36,7 @@ const ToDo = () => {
     }
     return [];
   });
+  console.log("inputValue", inputValue.current);
 
   //Function for Adding a new Task
   function addTask() {
@@ -59,12 +60,15 @@ const ToDo = () => {
 
   // Function to Edit Task
   function editTask(id) {
-    console.log("id", id);
+    console.log("idedittask", id);
     if (editData.isEdit) {
       setTaskData((prev) => {
         const tempData = prev.map((ele, ind) => {
           if (id == ind) {
-            return { ...ele, todo: inputValue.current };
+            return {
+              ...ele,
+              todo: inputValue.current ? inputValue.current : ele.todo,
+            };
           }
           return ele;
         });
@@ -142,7 +146,10 @@ const ToDo = () => {
       {/* displaying tasks */}
       <h1>Here are your Tasks</h1>
 
-      <div className="radioArea">
+      <div
+        className="radioArea"
+        // style={{ display: "flex", justifyContent: "center" }}
+      >
         <RadioGroup
           row
           aria-labelledby="demo-radio-buttons-group-label"
@@ -176,6 +183,7 @@ const ToDo = () => {
                 <div className="serialArea">
                   {editData.isEdit && editData.index == index ? (
                     <div>
+                      {index + 1}
                       <input
                         className="textTaskk"
                         defaultValue={ele.todo}
