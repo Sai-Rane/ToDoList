@@ -8,8 +8,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import Chip from "@mui/material/Chip";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Chip from "@mui/material/Chip";
 import { getLocalData, setLocalData } from "./util";
 
 const ToDo = () => {
@@ -36,7 +36,6 @@ const ToDo = () => {
     }
     return [];
   });
-  console.log("text", text);
 
   //Function for Adding a new Task
   function addTask() {
@@ -83,7 +82,7 @@ const ToDo = () => {
   }
 
   function completeTask(id) {
-    console.log("idghy", id);
+    console.log("idCompleteTask", id);
     let updateData = [...taskData];
     updateData[id].completed = true;
     setTaskData(updateData);
@@ -113,6 +112,7 @@ const ToDo = () => {
     setFilterData([...taskData]);
   }, [taskData]);
   console.log("taskData", taskData);
+
   return (
     <div className="main">
       <div className="toDo_Text">
@@ -142,50 +142,53 @@ const ToDo = () => {
       {/* displaying tasks */}
       <h1>Here are your Tasks</h1>
 
-      <RadioGroup
-        row
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="allTasks"
-        name="radio-buttons-group"
-        onChange={handleRadioChange}
-      >
-        <FormControlLabel
-          value="allTasks"
-          control={<Radio color="default" />}
-          label="All Tasks"
-        />
-        <FormControlLabel
-          value="activeTasks"
-          control={<Radio color="default" />}
-          label="Active Tasks"
-        />
-        <FormControlLabel
-          value="completedTasks"
-          control={<Radio color="default" />}
-          label="Completed Tasks"
-        />
-      </RadioGroup>
+      <div className="radioArea">
+        <RadioGroup
+          row
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue="allTasks"
+          name="radio-buttons-group"
+          onChange={handleRadioChange}
+        >
+          <FormControlLabel
+            value="allTasks"
+            control={<Radio color="default" />}
+            label="All Tasks"
+          />
+          <FormControlLabel
+            value="activeTasks"
+            control={<Radio color="default" />}
+            label="Active Tasks"
+          />
+          <FormControlLabel
+            value="completedTasks"
+            control={<Radio color="default" />}
+            label="Completed Tasks"
+          />
+        </RadioGroup>
+      </div>
 
       {filterData.length > 0 &&
         filterData.map((ele, index) => {
           return (
             <>
               <div className="taskArea" key={index}>
-                {editData.isEdit && editData.index == index ? (
-                  <ol>
-                    <li>
-                      <div>
-                        <input defaultValue={ele.todo} onChange={handleEdit} />
-                      </div>
-                    </li>
-                  </ol>
-                ) : (
-                  <ol>
-                    <li>
+                <div className="serialArea">
+                  {editData.isEdit && editData.index == index ? (
+                    <div>
+                      <input
+                        className="textTaskk"
+                        defaultValue={ele.todo}
+                        onChange={handleEdit}
+                      />
+                    </div>
+                  ) : (
+                    <div className="taskSerial">
+                      <div>{index + 1}</div>
                       <div>{ele.todo}</div>
-                    </li>
-                  </ol>
-                )}
+                    </div>
+                  )}
+                </div>
 
                 <div>
                   <Chip

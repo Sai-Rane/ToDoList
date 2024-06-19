@@ -1,15 +1,14 @@
+body{
+background-color: rgb(10 51 92);
+color: white;
+}
 .main{
     background-color: rgb(77, 155, 232);
-    width: 95%;
+    max-width: 95%;
     border-radius: 5px;
     margin: 20px 20px 20px 20px;
     padding: 20px;  
     border: 2px solid rgb(168, 227, 51);
-}
-
-body{
-background-color: rgb(10 51 92);
-color: white;
 }
 h1{
     text-align: center;
@@ -17,19 +16,53 @@ h1{
 }
 .textTask{
     width: 20%;
-    height: 25px;
+    /* height: 25px; */
     padding: 5px;
+}
+.textTaskk{
+    width: 20%;
+    height: 20px;
+    padding: 5px;
+    margin-left: 20px;
 }
 .main-Two{
     display: flex;
     justify-content: center;
     gap: 5px;
 }
-
 .taskArea{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background-color: rgb(29, 108, 187);
-    gap: 20px;
     border-radius: 5px;
+    margin-bottom: 2%;
 }
+.radioArea{
+    display: grid;
+    justify-content: "center"
+}
+.taskSerial{
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+}
+.serialArea{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+/* For mobile device */
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: rgb(4, 24, 43);
+    }
+    .taskArea{
+        display: grid;
+        grid-template-columns: 0.5fr 0.5fr;
+        background-color: rgb(29, 108, 187);
+        border-radius: 5px;
+        max-width: auto;
+        margin-bottom: 2%;
+    }
+  }
